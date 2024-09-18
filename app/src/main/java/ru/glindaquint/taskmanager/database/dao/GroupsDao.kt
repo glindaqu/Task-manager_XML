@@ -1,6 +1,6 @@
 package ru.glindaquint.taskmanager.database.dao
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -17,8 +17,8 @@ interface GroupsDao {
     suspend fun delete(model: GroupData)
 
     @Query("SELECT * FROM GroupData")
-    fun getAllGroups(): MutableLiveData<List<GroupData>>
+    fun getAllGroups(): LiveData<List<GroupData>>
 
     @Query("SELECT * FROM GroupData WHERE id = :id LIMIT 1")
-    fun get(id: Long): MutableLiveData<GroupData>
+    fun get(id: Long): LiveData<GroupData>
 }

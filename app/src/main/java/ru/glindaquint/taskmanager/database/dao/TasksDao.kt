@@ -1,6 +1,6 @@
 package ru.glindaquint.taskmanager.database.dao
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -17,8 +17,8 @@ interface TasksDao {
     suspend fun delete(model: TaskData)
 
     @Query("SELECT * FROM TaskData")
-    fun getAllTasks(): MutableLiveData<List<TaskData>>
+    fun getAllTasks(): LiveData<List<TaskData>>
 
     @Query("SELECT * FROM TaskData WHERE id = :id LIMIT 1")
-    fun get(id: Long): MutableLiveData<TaskData>
+    fun get(id: Long): LiveData<TaskData>
 }
