@@ -1,9 +1,9 @@
 package ru.glindaquint.taskmanager
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -12,20 +12,16 @@ import ru.glindaquint.taskmanager.databinding.ActivityMainBinding
 import ru.glindaquint.taskmanager.viewModels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val viewModel by lazy { ViewModelProvider(this)[MainViewModel::class.java] }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-        viewModel =
-            ViewModelProvider(this)[MainViewModel::class.java]
-        val tasksAdapter = TasksGridAdapter(this)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        viewModel.getAllTasks().observe(this) { tasksAdapter.update(it) }
-
         setContentView(binding.root)
+
+        val tasksAdapter = TasksGridAdapter(this)
+        viewModel.getAllTasks().observe(this) { tasksAdapter.update(it) }
 
         binding.tasksList.adapter = tasksAdapter
 
@@ -34,12 +30,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             return@setOnApplyWindowInsetsListener insets
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.create_new_task) {
-        } else if (item.itemId == R.id.create_new_group) {
-        }
-        return super.onOptionsItemSelected(item)
+        binding.toolbar.setOnMenuItemClickListener(
+            Toolbar.OnMenuItemClickListener { item ->
+                if (item.itemId == R.id.create_new_task) {
+                    viewModel.createTask(null, null)
+                }
+                return@OnMenuItemClickListener true
+            },
+        )
     }
 }
