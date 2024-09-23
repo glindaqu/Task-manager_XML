@@ -25,4 +25,13 @@ class EditTaskViewModel(
     }
 
     fun getTask(id: Long): LiveData<TaskData> = taskRepository.get(id)
+
+    fun changeDone(
+        id: Long,
+        new: Boolean,
+    ) {
+        viewModelScope.launch {
+            if (new) taskRepository.setDone(id) else taskRepository.setUndone(id)
+        }
+    }
 }
