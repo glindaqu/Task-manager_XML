@@ -16,4 +16,5 @@ data class TaskData(
     @ColumnInfo val body: String? = null,
     @ColumnInfo val creationDate: Long = Date().time,
     @ColumnInfo val parent: Long = 0,
+    @ColumnInfo val isDone: Boolean = false,
 )

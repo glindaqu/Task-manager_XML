@@ -21,4 +21,10 @@ interface TasksDao {
 
     @Query("SELECT * FROM TaskData WHERE id = :id LIMIT 1")
     fun get(id: Long): LiveData<TaskData>
+
+    @Query("UPDATE TaskData SET isDone = 1 WHERE id = :id")
+    suspend fun setDone(id: Long)
+
+    @Query("UPDATE TaskData SET isDone = 0 WHERE id = :id")
+    suspend fun setUndone(id: Long)
 }

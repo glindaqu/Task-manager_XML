@@ -9,7 +9,7 @@ import ru.glindaquint.taskmanager.database.dao.TasksDao
 import ru.glindaquint.taskmanager.database.entities.GroupData
 import ru.glindaquint.taskmanager.database.entities.TaskData
 
-@Database(version = 1, entities = [TaskData::class, GroupData::class])
+@Database(version = 2, entities = [TaskData::class, GroupData::class])
 abstract class AppDB : RoomDatabase() {
     abstract fun getTasksDao(): TasksDao
 

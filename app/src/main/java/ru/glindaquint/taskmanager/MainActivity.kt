@@ -31,14 +31,22 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             return@setOnApplyWindowInsetsListener insets
         }
+
         binding.toolbar.setOnMenuItemClickListener(
             Toolbar.OnMenuItemClickListener { item ->
                 if (item.itemId == R.id.create_new_task) {
-                    val intent = Intent(this, CreateTaskActivity::class.java)
-                    startActivity(intent)
+                    navigateToTaskCreation()
                 }
                 return@OnMenuItemClickListener true
             },
         )
+
+        binding.createNewTask.setOnClickListener { navigateToTaskCreation() }
+    }
+
+    private fun navigateToTaskCreation() {
+        val intent = Intent(this, EditTaskActivity::class.java)
+        startActivity(intent)
+        this.finish()
     }
 }

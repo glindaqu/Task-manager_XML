@@ -15,10 +15,11 @@ class TaskRepository(
         title: String?,
         body: String?,
         root: Long = 0,
+        id: Long? = null,
     ) {
         dao.add(
             TaskData(
-                id = null,
+                id = id,
                 title = title,
                 body = body,
                 creationDate = Date().time,
@@ -38,4 +39,12 @@ class TaskRepository(
     fun get(id: Long): LiveData<TaskData> = dao.get(id)
 
     fun getAll(): LiveData<List<TaskData>> = dao.getAllTasks()
+
+    suspend fun setDone(id: Long) {
+        dao.setDone(id)
+    }
+
+    suspend fun setUndone(id: Long) {
+        dao.setUndone(id)
+    }
 }
