@@ -38,7 +38,7 @@ class TasksGridAdapter(
             }
         val task = getItem(position)
         binding.title.text = task?.title ?: "Task #${task?.id}"
-        binding.body.text = task?.title ?: "The task body is empty..."
+        binding.body.text = task?.body ?: "The task body is empty..."
         binding.creationDate.text = SimpleDateFormat("dd.MM.yyyy").format(task?.creationDate)
         return binding.root
     }

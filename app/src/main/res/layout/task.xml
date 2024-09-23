@@ -33,7 +33,6 @@
             android:layout_marginBottom="16dp"
             android:maxLines="3"
             android:text="This is the part of title or something like this"
-            app:flow_wrapMode="chain"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title" />

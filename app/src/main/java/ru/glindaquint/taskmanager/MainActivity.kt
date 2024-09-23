@@ -1,5 +1,6 @@
 package ru.glindaquint.taskmanager
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -33,7 +34,8 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setOnMenuItemClickListener(
             Toolbar.OnMenuItemClickListener { item ->
                 if (item.itemId == R.id.create_new_task) {
-                    viewModel.createTask(null, null)
+                    val intent = Intent(this, CreateTaskActivity::class.java)
+                    startActivity(intent)
                 }
                 return@OnMenuItemClickListener true
             },

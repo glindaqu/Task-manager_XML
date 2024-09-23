@@ -2,26 +2,22 @@ package ru.glindaquint.taskmanager.viewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.glindaquint.taskmanager.database.entities.TaskData
 import ru.glindaquint.taskmanager.repositories.TaskRepository
 
-class MainViewModel(
+class CreateTaskViewModel(
     application: Application,
 ) : AndroidViewModel(application) {
     private val taskRepository = TaskRepository(application)
 
-    fun getAllTasks(): LiveData<List<TaskData>> = taskRepository.getAll()
-
     fun createTask(
         title: String?,
         body: String?,
-        parentId: Long = 0L,
+        root: Long = 0,
     ) {
         viewModelScope.launch {
-            taskRepository.create(TaskData(title = title, body = body, parent = parentId))
+            taskRepository.create(title, body, root)
         }
     }
 }
